@@ -9,7 +9,7 @@ function _anyframe-action-put()
     BUFFER="$*"
     CURSOR=$#BUFFER
     # redisplay the command line
-    zle -R -c
+    zle redisplay
   else
     print -z -f '%s' "$*"
   fi
@@ -36,6 +36,9 @@ shift $((OPTIND - 1))
 local selected_items
 selected_items="$(cat)"
 if [[ -z "$selected_items" ]]; then
+  if zle; then
+   zle redisplay
+  fi
   return 1
 fi
 
