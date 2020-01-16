@@ -10,7 +10,7 @@ function _anyframe-action-execute()
     BUFFER="$*"
     zle accept-line
     # redisplay the command line
-    zle redisplay
+    zle -R -c
   else
     eval "$*"
   fi
@@ -41,9 +41,6 @@ shift $((OPTIND - 1))
 local selected_items
 selected_items="$(cat)"
 if [[ -z "$selected_items" ]]; then
-  if zle; then
-   zle redisplay
-  fi
   return 1
 fi
 
